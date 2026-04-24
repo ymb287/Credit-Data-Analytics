@@ -89,7 +89,10 @@ def prepare_raw_credit_data(df):
 
     # convert numeric where possible
     for col in out.columns:
-        out[col] = pd.to_numeric(out[col], errors="ignore")
+        try:
+            out[col] = pd.to_numeric(out[col], errors="coerce")
+        except Exception:
+            pass
 
     # same mapping as notebook
     out["EDUCATION"] = out["EDUCATION"].replace({0: 4, 5: 4, 6: 4})
