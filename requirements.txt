@@ -6,5 +6,4 @@ openpyxl
 scikit-learn
 joblib
 xlrd
-os
 gdown
