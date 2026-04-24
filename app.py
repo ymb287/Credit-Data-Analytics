@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import os
+import gdown
 
 st.set_page_config(page_title="Credit Risk Contact Prioritizer", layout="wide")
 
@@ -232,6 +234,14 @@ st.caption(
 DEFAULT_MODEL_PATH = "random_forest.pkl"
 DEFAULT_COLUMNS_PATH = "training_columns.pkl"
 
+MODEL_URL = "https://drive.google.com/uc?id=1dnac94GppuJGHIIgQoUp1J2pYB-g5Fkf"
+
+@st.cache_resource
+def load_default_model():
+    if not os.path.exists(DEFAULT_MODEL_PATH):
+        gdown.download(MODEL_URL, DEFAULT_MODEL_PATH, quiet=False)
+    return joblib.load(DEFAULT_MODEL_PATH)
+
 with st.sidebar:
     st.header("Inputs")
 
@@ -312,7 +322,7 @@ if run_btn:
         model = joblib.load(model_file)
         st.info("Using uploaded custom model")
     else:
-        model = joblib.load(DEFAULT_MODEL_PATH)
+        model = load_default_model()
         st.info("Using default model")
 
     if training_cols_file is not None:
