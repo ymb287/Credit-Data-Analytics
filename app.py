@@ -431,9 +431,8 @@ if run_btn:
 st.markdown("---")
 st.markdown("### Important note")
 st.info(
-    "This app assumes the uploaded training-columns file was saved from the exact "
-    "training feature matrix after `pd.get_dummies(..., drop_first=True)`. "
-    "In your notebook, save it with: `joblib.dump(X.columns.tolist(), 'training_columns.pkl')`."
+    "This app assumes the uploaded file is the same formate as the original dataset used for training, and that the same preparation steps can be applied. "
+    "No model or training columns need to be uploaded, when using the base model"
 )
 
 # ============================================================
